@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.TextView;
 
-public class Tab3Activity extends Activity {
+public class RecordsActivity extends Activity {
 	@Override
     public void onCreate(Bundle savedInstanceState)
     {

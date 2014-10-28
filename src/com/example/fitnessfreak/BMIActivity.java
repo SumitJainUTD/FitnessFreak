@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.TextView;
 
-public class Tab2Activity extends Activity {
+public class BMIActivity extends Activity {
 	@Override
     public void onCreate(Bundle savedInstanceState)
     {

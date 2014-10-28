@@ -26,13 +26,13 @@
             android:name="com.example.fitnessfreak.UserProfile">            
         </activity>
         <activity            
-            android:name="com.example.fitnessfreak.Tab3Activity">            
+            android:name="com.example.fitnessfreak.RecordsActivity">            
         </activity>
          <activity            
-            android:name="com.example.fitnessfreak.Tab1Activity">            
+            android:name="com.example.fitnessfreak.WalkActivity">            
         </activity>
          <activity            
-            android:name="com.example.fitnessfreak.Tab2Activity">            
+            android:name="com.example.fitnessfreak.BMIActivity">            
         </activity>
     </application>
 

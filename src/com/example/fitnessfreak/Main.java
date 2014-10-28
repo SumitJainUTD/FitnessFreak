@@ -33,13 +33,13 @@ public class Main extends TabActivity {
        // Set the Tab name and Activity
        // that will be opened when particular Tab will be selected
         tab1.setIndicator("Tab1");
-        tab1.setContent(new Intent(this,Tab1Activity.class));
+        tab1.setContent(new Intent(this,WalkActivity.class));
        
         tab2.setIndicator("Tab2");
-        tab2.setContent(new Intent(this,Tab2Activity.class));
+        tab2.setContent(new Intent(this,BMIActivity.class));
 
         tab3.setIndicator("Tab3");
-        tab3.setContent(new Intent(this,Tab3Activity.class));
+        tab3.setContent(new Intent(this,RecordsActivity.class));
        
         /** Add the tabs  to the TabHost to display. */
         tabHost.addTab(tab1);
