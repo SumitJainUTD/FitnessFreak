@@ -34,6 +34,9 @@
          <activity            
             android:name="com.example.fitnessfreak.BMIActivity">            
         </activity>
+        <activity            
+            android:name="com.example.fitnessfreak.Settings">            
+        </activity>
     </application>
 
 </manifest>

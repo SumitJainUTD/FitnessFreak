@@ -11,12 +11,12 @@ public class BMIActivity extends Activity {
     {
         super.onCreate(savedInstanceState);
        
-//        TextView  tv=new TextView(this);
-//        tv.setTextSize(25);
-//        tv.setGravity(Gravity.CENTER_VERTICAL);
-//        tv.setText("This Is Tab2 Activity");
+        TextView  tv=new TextView(this);
+        tv.setTextSize(25);
+        tv.setGravity(Gravity.CENTER_VERTICAL);
+        tv.setText("This Is Tab2 Activity");
        
-//        setContentView(tv);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(tv);
+//        
     }
 }
