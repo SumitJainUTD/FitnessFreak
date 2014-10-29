@@ -8,15 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 public class UserProfile extends ActionBarActivity {
-	public String [] sex = {"Female", "Male"};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_profile);
-		Spinner s1 = (Spinner)findViewById(R.id.sex);
-		ArrayAdapter<String> adptr = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,sex);
-		adptr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		s1.setAdapter(adptr);
+		
 	}
 
 	@Override

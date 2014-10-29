@@ -4,12 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+   
+
     <EditText
         android:id="@+id/alertSubject"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:ems="10"
-        android:inputType="number" >
+        android:inputType="numberDecimal" >
 
         <requestFocus />
     </EditText>

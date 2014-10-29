@@ -65,7 +65,7 @@ public class Main extends TabActivity {
 			// do nothing//
 		} else {
 			cf.addDefaultUserData("Age", "25");
-			cf.addDefaultUserData("Sex", "male");
+			cf.addDefaultUserData("Sex", "Male");
 			cf.addDefaultUserData("Height", "0");
 			cf.addDefaultUserData("Weight", "0");
 			Log.i("Profile Created", "Profile Created");

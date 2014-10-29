@@ -7,12 +7,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -34,6 +37,8 @@ public class Settings extends Activity {
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.activity_user_profile);
 		setContentView(R.layout.setting_list);
+		
+		
 		listview = (ListView) findViewById(R.id.settingContent_list);
 		cf = new CommonFunctions(this);
 		listOfItems = new ArrayList<String>();
@@ -73,43 +78,19 @@ public class Settings extends Activity {
 				Log.i("com.example.wordtry",fieldVal.getText().toString());
 				if(strClickedSection.equalsIgnoreCase("Height")){
 					strTitle = "Height (Centimeters)";
-					cf.ShowAlertDialog(strTitle, "Height", fieldVal);
+					cf.ShowAlertDialog(strTitle, "Height");
 					Log.i("SSSSSSSSSSSSSSSSSSSS",fieldVal.getText().toString());
 				}else if(strClickedSection.equalsIgnoreCase("Weight")){
-					strTitle = "Height (Kilograms)";
+					strTitle = "Weight (Kilograms)";
+					cf.ShowAlertDialog(strTitle, "Weight");
 				}else if(strClickedSection.equalsIgnoreCase("Age")){
 					strTitle = "Age (Number)";
+					cf.ShowAlertDialogNumbers(strTitle, "Age");
 				}else if(strClickedSection.equalsIgnoreCase("Sex")){
 					strTitle = "Sex";
+					cf.ShowAlertDialogSpinner(strTitle, "Sex");
 				}
 				Log.i("resuming page", "resuming pzge");
-				onResume();
-				//Toast.makeText(this, "strClickedSection", "LENGTH_SHORT").show();
-//				Cursor csr = wp.getAllWords("Select * from mainwordlist where Word = '"+ strClickedWord+"'");
-//				Log.i("com.example.wordtry","Cursor returned");
-//				if (csr.moveToFirst()){
-//					//do
-//						//
-//						 intID= csr.getInt(0);
-//						 strWord = csr.getString(1);
-//						 strMeaning = csr.getString(2);
-//						 strSentence = csr.getString(3);
-//						Log.i("com.example.wordtry", strWord);
-//						Log.i("com.example.wordtry", String.valueOf(intID));
-//						Log.i("com.example.wordtry", strMeaning);
-//						Log.i("com.example.wordtry", strSentence);
-//					//}while(csr.moveToNext());
-//				}
-//				csr.close();
-//				wp.close();
-//				Intent intent = new Intent(MainList.this,WordDetails.class);
-//				intent.putExtra(W_ID,intID);
-//				intent.putExtra(WORD_D, strWord);
-//				intent.putExtra(MEANING_D, strMeaning);
-//				intent.putExtra(SENTENCE_D, strSentence);
-//				intent.putExtra(WORD_LIST, strListName);
-//				startActivity(intent);
-				
 			}
 		});
 	}

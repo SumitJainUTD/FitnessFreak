@@ -49,12 +49,12 @@ public class FFOpenHelper extends SQLiteOpenHelper {
 	}
 
 	
-	public void updateProfileRow(String field, String value) {
+	public void updateProfileRow(int field, String value) {
 		Log.i("updating value" , value);
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues cv = new ContentValues();
 		cv.put("Subject_Value", value);
-		db.update("Profile", cv, "_id"+"="+"3" , null);
+		db.update("Profile", cv, "_id"+"="+field , null);
 		db.close();
 		Log.i("updated value" , value);
 	}
