@@ -60,7 +60,7 @@ public class BMIActivity extends Activity {
 		
 		double BMI = Math.round((weight/(height*height)));
 		TextView BMIfield = (TextView)findViewById(R.id.BMI);
-		BMIfield.setText(String.valueOf(BMI));
+		BMIfield.setText("BMI: " + String.valueOf(BMI));
 		
 		TextView con = (TextView)findViewById(R.id.conclusion);
 		con.setText(conclusion(BMI, gender));
