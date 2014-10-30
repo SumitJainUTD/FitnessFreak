@@ -53,6 +53,18 @@ public class CommonFunctions extends Main {
 		Cursor csr = ff.executeQuery(strQuery);
 		return csr;
 	}
+	public String getSpecificCUserData(String field){
+		String value="";
+		Cursor csr = ff.executeQuery("Select * from Profile where Subject = '"+ field +"'");
+		Log.i("Cursor Returned", field);
+		if (csr.moveToFirst()){
+			Log.i("Age", csr.getString(1));
+			value= csr.getString(csr.getColumnIndex("Subject_Value"));
+			Log.i("Age", value);
+		}
+		csr.close();
+		return value;
+	}
 
 	public void updateUserProfileData(String section, String value) {
 		int sectionID =1;
@@ -71,7 +83,7 @@ public class CommonFunctions extends Main {
 		ff.updateProfileRow(sectionID, value);
 	}
 
-	public void ShowAlertDialog(String strTitle, final String section) {
+	public void ShowAlertDialog(String strTitle, final String section, String defaultVal) {
 		View AlertView;
 		
 		Log.i("dialog displayed" , "displayed");
@@ -94,9 +106,9 @@ public class CommonFunctions extends Main {
 		// set prompts.xml to alertdialog builder
 		alertDialogBuilder.setView(AlertView);
 		alertDialogBuilder.setTitle(strTitle);
-
 		final EditText userInput = (EditText) AlertView
 				.findViewById(R.id.alertSubject);
+		userInput.setText(defaultVal);
 		
 		//Log.i("Entered Value" , inputText);
 		// set dialog message
@@ -125,7 +137,7 @@ public class CommonFunctions extends Main {
 		// show it
 		alertDialog.show();
 	}
-	public void ShowAlertDialogSpinner(String strTitle, final String section) {
+	public void ShowAlertDialogSpinner(String strTitle, final String section, String defaultVal) {
 		View AlertView;
 		
 		Log.i("dialog displayed" , "displayed");
@@ -144,8 +156,6 @@ public class CommonFunctions extends Main {
 		
 		final Spinner spn = (Spinner) AlertView
 				.findViewById(R.id.genderSpinner);
-		
-		
 		
 		//Log.i("Entered Value" , inputText);
 		// set dialog message
@@ -175,7 +185,7 @@ public class CommonFunctions extends Main {
 		alertDialog.show();
 		
 	}
-	public void ShowAlertDialogNumbers(String strTitle, final String section) {
+	public void ShowAlertDialogNumbers(String strTitle, final String section, String defaultVal) {
 		View AlertView;
 		
 		Log.i("dialog displayed" , "displayed");
@@ -189,7 +199,7 @@ public class CommonFunctions extends Main {
 
 		final EditText userInput = (EditText) AlertView
 				.findViewById(R.id.alertSubjectNumber);
-		
+		userInput.setText(defaultVal);
 		//Log.i("Entered Value" , inputText);
 		// set dialog message
 		alertDialogBuilder.setCancelable(false);

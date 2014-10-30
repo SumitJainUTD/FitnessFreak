@@ -78,17 +78,21 @@ public class Settings extends Activity {
 				Log.i("com.example.wordtry",fieldVal.getText().toString());
 				if(strClickedSection.equalsIgnoreCase("Height")){
 					strTitle = "Height (Centimeters)";
-					cf.ShowAlertDialog(strTitle, "Height");
+					String defaultVal = cf.getSpecificCUserData("Height"); 
+					cf.ShowAlertDialog(strTitle, "Height",defaultVal);
 					Log.i("SSSSSSSSSSSSSSSSSSSS",fieldVal.getText().toString());
 				}else if(strClickedSection.equalsIgnoreCase("Weight")){
 					strTitle = "Weight (Kilograms)";
-					cf.ShowAlertDialog(strTitle, "Weight");
+					String defaultVal = cf.getSpecificCUserData("Weight");
+					cf.ShowAlertDialog(strTitle, "Weight",defaultVal);
 				}else if(strClickedSection.equalsIgnoreCase("Age")){
 					strTitle = "Age (Number)";
-					cf.ShowAlertDialogNumbers(strTitle, "Age");
+					String defaultVal = cf.getSpecificCUserData("Age");
+					cf.ShowAlertDialogNumbers(strTitle, "Age",defaultVal);
 				}else if(strClickedSection.equalsIgnoreCase("Sex")){
 					strTitle = "Sex";
-					cf.ShowAlertDialogSpinner(strTitle, "Sex");
+					String defaultVal = cf.getSpecificCUserData("Sex");
+					cf.ShowAlertDialogSpinner(strTitle, "Sex",defaultVal);
 				}
 				Log.i("resuming page", "resuming pzge");
 			}
