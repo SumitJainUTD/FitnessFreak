@@ -1,5 +1,7 @@
 package com.example.fitnessfreak;
 
+import java.sql.Date;
+
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -31,7 +33,7 @@ public class CommonFunctions extends Main {
 
 	public CommonFunctions(Context cxt) {
 		this.cxt = cxt;
-		DBName = "FF02.db";
+		DBName = "FF03.db";
 		ff = new FFOpenHelper(cxt, DBName, null, 1);
 	}
 
@@ -44,6 +46,10 @@ public class CommonFunctions extends Main {
 		csr.close();
 		return intTemp;
 	}
+	public void addStep(String date){
+		ff.updateWalkData(date);
+	}
+	
 
 	public void addDefaultUserData(String subject, String subjectValue) {
 		ff.addProfileData(subject, subjectValue);
@@ -80,63 +86,69 @@ public class CommonFunctions extends Main {
 		if (section.equalsIgnoreCase("Sex")) {
 			sectionID = 2;
 		}
+		Log.i("xxxxxx" , value);
 		ff.updateProfileRow(sectionID, value);
 	}
 
-	public void ShowAlertDialog(String strTitle, final String section, String defaultVal) {
-		View AlertView;
-		
-		Log.i("dialog displayed" , "displayed");
-		LayoutInflater li = LayoutInflater.from(cxt);
-		AlertView = li.inflate(R.layout.alert_xml_edit_double, null);
-		if (section.equalsIgnoreCase("Height")) {
-			AlertView = li.inflate(R.layout.alert_xml_edit_double, null);
-		}
-		if (section.equalsIgnoreCase("Weight")) {
-			AlertView = li.inflate(R.layout.alert_xml_edit_double, null);
-		}
-		if (section.equalsIgnoreCase("Age")) {
-			AlertView = li.inflate(R.layout.alert_xml_edit_number, null);
-		}
-		if (section.equalsIgnoreCase("Sex")) {
-			AlertView = li.inflate(R.layout.alert_xml_edit_double, null);
-		}
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(cxt);
-
-		// set prompts.xml to alertdialog builder
-		alertDialogBuilder.setView(AlertView);
-		alertDialogBuilder.setTitle(strTitle);
-		final EditText userInput = (EditText) AlertView
-				.findViewById(R.id.alertSubject);
-		userInput.setText(defaultVal);
-		
-		//Log.i("Entered Value" , inputText);
-		// set dialog message
-		alertDialogBuilder.setCancelable(false);
-		alertDialogBuilder.setPositiveButton("OK",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						final String inputText = userInput.getText().toString();
-						Log.i("user input" , inputText);
-						updateUserProfileData(section, inputText);
-						Log.i("DB Updated", "DB Updated");
-						Cursor c = getData("Select * from Profile");
-						Settings.listview.setAdapter(new SettingAdapter(cxt, c));
-					}
-				});
-		alertDialogBuilder.setNegativeButton("Cancel",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-					}
-				});
-
-		// create alert dialog
-		AlertDialog alertDialog = alertDialogBuilder.create();
-
-		// show it
-		alertDialog.show();
-	}
+//	public void ShowAlertDialog(String strTitle, final String section, String defaultVal) {
+//		View AlertView;
+//		
+//		Log.i("dialog displayed" , "displayed");
+//		LayoutInflater li = LayoutInflater.from(cxt);
+//		AlertView = li.inflate(R.layout.alert_xml_edit_double, null);
+//		if (section.equalsIgnoreCase("Height")) {
+//			AlertView = li.inflate(R.layout.alert_xml_edit_double, null);
+//		}
+//		if (section.equalsIgnoreCase("Weight")) {
+//			AlertView = li.inflate(R.layout.alert_xml_edit_double, null);
+//		}
+//		if (section.equalsIgnoreCase("Age")) {
+//			AlertView = li.inflate(R.layout.alert_xml_edit_number, null);
+//		}
+//		if (section.equalsIgnoreCase("Sex")) {
+//			AlertView = li.inflate(R.layout.alert_xml_edit_double, null);
+//		}
+//		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(cxt);
+//
+//		// set prompts.xml to alertdialog builder
+//		alertDialogBuilder.setView(AlertView);
+//		alertDialogBuilder.setTitle(strTitle);
+//		final EditText userInput = (EditText) AlertView
+//				.findViewById(R.id.alertSubject);
+//		userInput.setText(defaultVal);
+//		
+//		//Log.i("Entered Value" , inputText);
+//		// set dialog message
+//		alertDialogBuilder.setCancelable(false);
+//		alertDialogBuilder.setPositiveButton("OK",
+//				new DialogInterface.OnClickListener() {
+//					public void onClick(DialogInterface dialog, int id) {
+//						final String inputText = userInput.getText().toString();
+//						if(inputText.trim()==""||inputText==null){
+//							updateUserProfileData(section, "0");
+//						}else{
+//							updateUserProfileData(section, inputText);
+//						}
+//						Log.i("user input" , inputText);
+//						
+//						Log.i("DB Updated", "DB Updated");
+//						Cursor c = getData("Select * from Profile");
+//						Settings.listview.setAdapter(new SettingAdapter(cxt, c));
+//					}
+//				});
+//		alertDialogBuilder.setNegativeButton("Cancel",
+//				new DialogInterface.OnClickListener() {
+//					public void onClick(DialogInterface dialog, int id) {
+//						dialog.cancel();
+//					}
+//				});
+//
+//		// create alert dialog
+//		AlertDialog alertDialog = alertDialogBuilder.create();
+//
+//		// show it
+//		alertDialog.show();
+//	}
 	public void ShowAlertDialogSpinner(String strTitle, final String section, String defaultVal) {
 		View AlertView;
 		
@@ -207,8 +219,14 @@ public class CommonFunctions extends Main {
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						final String inputText = userInput.getText().toString();
-						Log.i("user input" , inputText);
-						updateUserProfileData(section, inputText);
+						Log.i("Here", "waitttt");
+						Log.i("inputText", inputText);
+						if(inputText.trim().matches("")||inputText==null){
+							Log.i("Here", "Yessss");
+							updateUserProfileData(section, "0");
+						}else{
+							updateUserProfileData(section, inputText);
+						}
 						Log.i("DB Updated", "DB Updated");
 						Cursor c = getData("Select * from Profile");
 						Settings.listview.setAdapter(new SettingAdapter(cxt, c));

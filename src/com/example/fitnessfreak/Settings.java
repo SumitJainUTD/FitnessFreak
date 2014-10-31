@@ -79,12 +79,12 @@ public class Settings extends Activity {
 				if(strClickedSection.equalsIgnoreCase("Height")){
 					strTitle = "Height (Centimeters)";
 					String defaultVal = cf.getSpecificCUserData("Height"); 
-					cf.ShowAlertDialog(strTitle, "Height",defaultVal);
+					cf.ShowAlertDialogNumbers(strTitle, "Height",defaultVal);
 					Log.i("SSSSSSSSSSSSSSSSSSSS",fieldVal.getText().toString());
 				}else if(strClickedSection.equalsIgnoreCase("Weight")){
 					strTitle = "Weight (Kilograms)";
 					String defaultVal = cf.getSpecificCUserData("Weight");
-					cf.ShowAlertDialog(strTitle, "Weight",defaultVal);
+					cf.ShowAlertDialogNumbers(strTitle, "Weight",defaultVal);
 				}else if(strClickedSection.equalsIgnoreCase("Age")){
 					strTitle = "Age (Number)";
 					String defaultVal = cf.getSpecificCUserData("Age");

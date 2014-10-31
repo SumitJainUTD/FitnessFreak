@@ -27,13 +27,14 @@
         android:weightSum="2" >
 
         <Button
-            android:id="@+id/Guest"
+            android:id="@+id/EditProfile"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:background="#abcaf0"
             android:gravity="center"
+            android:onClick="EditProfile"
             android:text="Edit Profile" />
     </LinearLayout>
 

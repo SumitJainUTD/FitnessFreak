@@ -1,7 +1,11 @@
 package com.example.fitnessfreak;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.TabActivity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,6 +18,7 @@ import android.widget.TabHost.TabSpec;
 @SuppressWarnings("deprecation")
 public class Main extends TabActivity {	
 	public CommonFunctions cf;
+	public static TabHost tabHost;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +31,8 @@ public class Main extends TabActivity {
         cf = new CommonFunctions(this); // intialize Common Function Object
         
      // create the TabHost that will contain the Tabs
-        TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
-
+        tabHost = (TabHost)findViewById(android.R.id.tabhost);
+        
 
         TabSpec tab1 = tabHost.newTabSpec("First Tab");
         TabSpec tab2 = tabHost.newTabSpec("Second Tab");
@@ -44,11 +49,11 @@ public class Main extends TabActivity {
 
         tab3.setIndicator("Records");
         tab3.setContent(new Intent(this,RecordsActivity.class));
+//        tab3.setContent(tabHost.newTabSpec("parent2").setIndicator("Parent2"),YesterdayRecords.class, null);
         
         tab4.setIndicator("Settings");
         tab4.setContent(new Intent(this,Settings.class));
-       
-        /** Add the tabs  to the TabHost to display. */
+                /** Add the tabs  to the TabHost to display. */
         tabHost.addTab(tab1);
         tabHost.addTab(tab2);
         tabHost.addTab(tab3);
@@ -70,6 +75,39 @@ public class Main extends TabActivity {
 			cf.addDefaultUserData("Weight", "0");
 			Log.i("Profile Created", "Profile Created");
 		}
+		Date dte = new Date(); 
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy")  ;
+		cf.addStep(sdf.format(dte));
+//		cf.addStep(sdf.format(dte));
+//		cf.addStep(sdf.format(dte));
+//		cf.addStep(sdf.format(dte));
+//		cf.addStep(sdf.format(dte));
+//		cf.addStep(sdf.format(dte));
+//		cf.addStep(sdf.format(dte));
+//		cf.addStep(sdf.format(dte));
+//		cf.addStep(sdf.format(dte));
+//		cf.addStep(sdf.format(dte));
+//		cf.addStep(sdf.format(dte));
+//		cf.addStep(sdf.format(dte));
+//		cf.addStep(sdf.format(dte));
+//		cf.addStep(sdf.format(dte));
+//		cf.addStep(sdf.format(dte));cf.addStep(sdf.format(dte));
+//		cf.addStep(sdf.format(dte));
+//		
+		Cursor csr = cf.getData("Select * from Walk where walkDate = '" + sdf.format(dte)	+ "'");
+		int ctr = 0;
+		Log.i("Cursor Returned", "yesssssssssssssss");
+		if (csr.moveToFirst()){
+			do {
+				Log.i("com.example.ID", String.valueOf(csr.getInt(0)));
+				Log.i("com.example.Step", String.valueOf(csr.getInt(1)));
+				Log.i("com.example.DIs", String.valueOf(csr.getDouble(2)));
+				Log.i("com.example.Cal", String.valueOf(csr.getDouble(3)));
+				Log.i("com.example.Date", String.valueOf(csr.getString(4)));
+			} while (csr.moveToNext());
+		}
+		
+		csr.close();
 	}
 
 

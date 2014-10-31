@@ -37,6 +37,15 @@
         <activity            
             android:name="com.example.fitnessfreak.Settings">            
         </activity>
+        <activity            
+            android:name="com.example.fitnessfreak.YesterdayRecords">            
+        </activity>
+        <activity            
+            android:name="com.example.fitnessfreak.LastSevenDaysRecords">            
+        </activity>
+        <activity            
+            android:name="com.example.fitnessfreak.LastThirtyDaysRecords">            
+        </activity>
     </application>
 
 </manifest>

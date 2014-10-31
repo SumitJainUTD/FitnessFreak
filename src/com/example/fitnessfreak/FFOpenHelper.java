@@ -1,5 +1,6 @@
 package com.example.fitnessfreak;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,15 +49,67 @@ public class FFOpenHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 
-	
+	public void updateWalkData(String date) {
+		int count = 0;
+		SQLiteDatabase db = this.getWritableDatabase();
+		
+		Cursor csr = executeQuery("Select Count(*)as Count from Walk where walkDate = '"+ date + "'");
+		if (csr.moveToFirst()) {
+			count = csr.getInt(csr.getColumnIndex("Count"));
+		}
+		csr.close();
+		Log.i("Count", String.valueOf(count));
+		if (count > 0) {
+			int steps=0;
+			double distance=0;
+			double calories=0;
+			ContentValues cv = new ContentValues();
+//			cv.put("Steps", 4);
+//			cv.put("distance", 4);
+//			cv.put("calories", 4);
+//			
+//			db.update("Walk", cv, "walkDate" + "='" + date + "'", null);
+//			Log.i("Steps", String.valueOf(3));
+			csr = executeQuery("Select * from Walk where walkDate = '" + date
+					+ "'");
+			if (csr.moveToFirst()) {
+				Log.i("Steps", String.valueOf("CCCCCCCCCCCC"));
+				steps = csr.getInt(1)+1;
+				distance = csr.getDouble(2)+1;
+				calories = csr.getDouble(3)+1;
+			}
+			csr.close();
+			cv.put("Steps", steps);
+			cv.put("distance", distance);
+			cv.put("calories", calories);		
+			db.update("Walk", cv, "walkDate" + "='" + date + "'", null);
+			Log.i("Steps", String.valueOf(steps));
+			
+			cv.clear();
+			Log.i("Value", "Increased");			
+			db.close();
+		} else {
+			ContentValues cv = new ContentValues();
+			cv.put("Steps", 1);
+			cv.put("distance", 1);
+			cv.put("calories", 1);
+			cv.put("walkDate", date);
+			
+			db.insert("Walk", null, cv);
+			Log.i("First Steps", String.valueOf(1));
+			db.close();
+			cv.clear();
+		}
+	}
+
 	public void updateProfileRow(int field, String value) {
-		Log.i("updating value" , value);
+		Log.i("updating value", value);
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues cv = new ContentValues();
 		cv.put("Subject_Value", value);
-		db.update("Profile", cv, "_id"+"="+field , null);
+		db.update("Profile", cv, "_id" + "=" + field, null);
 		db.close();
-		Log.i("updated value" , value);
+		Log.i("updated value", value);
 	}
 
 	public void deleteWordFromList(Integer intMainID, Integer intGroupID) {
