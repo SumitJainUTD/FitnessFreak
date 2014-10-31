@@ -5,11 +5,13 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +24,8 @@ public class WalkActivity extends Activity implements SensorEventListener {
 	Sensor mGyroscopre;
 	Sensor mStepDetector;
 	TextView steps;
+	TextView distance;
+	TextView Cals;
 	Button start;
 	int stepCount;
 	int changes;
@@ -35,6 +39,21 @@ public class WalkActivity extends Activity implements SensorEventListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.walk);
 		cf = new CommonFunctions(this); // intialize Common Function Object
+		steps = (TextView) findViewById(R.id.steps);
+		distance = (TextView) findViewById(R.id.distanceC);
+		Cals = (TextView) findViewById(R.id.caloriesC);
+		Date dte = new Date(); 
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy")  ;
+		String strCountQuery = "Select Count(*) as Count from walk where walkDate = strftime('%m/%d/%Y',date('now'))";
+		int x = cf.getRecordsCount(strCountQuery);
+		if(x<1){
+			steps.setText("0");
+			distance.setText("0 km");
+			steps.setText("0 kCals");
+		}
+
+//		cf.addStep(sdf.format(dte));
+		
 		sensormgr = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		// mAccelerometer =
 		//
@@ -48,7 +67,7 @@ public class WalkActivity extends Activity implements SensorEventListener {
 		} else {
 			stepDetectorSensor = true;
 		}
-		steps = (TextView) findViewById(R.id.steps);
+		
 		start = (Button) findViewById(R.id.start);
 		start.setText("Start");
 	}
@@ -88,10 +107,12 @@ public class WalkActivity extends Activity implements SensorEventListener {
 		
 		if (stepDetectorSensor) {
 			stepCount++;
-			steps.setText(String.valueOf(stepCount));
+//			steps.setText(String.valueOf(stepCount));
 			Date dte = new Date(); 
 			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy")  ;
 			cf.addStep(sdf.format(dte));
+			updateWalkData();
+			
 		} else {
 			double x = event.values[0];
 			double y = event.values[1];
@@ -120,8 +141,13 @@ public class WalkActivity extends Activity implements SensorEventListener {
 				// steps.setText(String.valueOf(stepCount));
 				// }
 				if (stepCount > 0) {
-					steps.setText(String.valueOf(stepCount));
+					Date dte = new Date(); 
+					SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy")  ;
+					cf.addStep(sdf.format(dte));
+//					steps.setText(String.valueOf(stepCount));
+					updateWalkData();
 				}
+				
 				flag = true;
 			}
 
@@ -143,6 +169,49 @@ public class WalkActivity extends Activity implements SensorEventListener {
 			// Log.i("k",String.valueOf(k));
 			// steps.setText(String.valueOf(EMAvector));
 			EMAvector = vctr * k + (1 - k) * EMAvector;
+		}
+	}
+	protected void onResume() {
+		super.onResume();
+		steps = (TextView) findViewById(R.id.steps);
+		distance = (TextView) findViewById(R.id.distanceC);
+		Cals = (TextView) findViewById(R.id.caloriesC);
+		Date dte = new Date(); 
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy")  ;
+		String strCountQuery = "Select Count(*) as Count from walk where walkDate = strftime('%m/%d/%Y',date('now'))";
+		int x = cf.getRecordsCount(strCountQuery);
+		if(x<1){
+			steps.setText("0");
+			distance.setText("0 km");
+			steps.setText("0 kCals");
+		}
+
+	}
+	
+	public void updateWalkData(){
+		String strQuery = "Select * from walk where walkDate = strftime('%m/%d/%Y',date('now'))";
+		Cursor csr = cf.getData(strQuery);
+		//Cursor csr = cf.getData("Select * from Walk where walkDate = '" + sdf.format(dte)	+ "'");
+		Log.i("Cursor Returned", "yesssssssssssssss");
+		if (csr.moveToFirst()){
+			do {
+				double dis = (csr.getDouble(2));
+				double cal = (csr.getDouble(3));
+				dis = Math.round(dis * 100);
+				dis = dis/100;
+				cal = Math.round(cal * 100);
+				cal = cal/100;
+//				double dis = Math.round(csr.getDouble(2));
+//				double cal = Math.round(csr.getDouble(3));
+				steps.setText(String.valueOf(csr.getInt(1)));
+				distance.setText(String.valueOf(dis)+ " kms");
+				Cals.setText(String.valueOf(cal)+ " kCals");
+				Log.i("com.example.ID", String.valueOf(csr.getInt(0)));
+				Log.i("com.example.Step", String.valueOf(csr.getInt(1)));
+				Log.i("com.example.DIs", String.valueOf(csr.getDouble(2)));
+				Log.i("com.example.Cal", String.valueOf(csr.getDouble(3)));
+				Log.i("com.example.Date", String.valueOf(csr.getString(4)));
+			} while (csr.moveToNext());
 		}
 	}
 }

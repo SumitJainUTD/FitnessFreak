@@ -52,7 +52,7 @@
                     android:layout_weight="1" >
 
                     <TextView
-                        android:id="@+id/distance"
+                        android:id="@+id/distanceC"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -67,7 +67,7 @@
                     android:layout_weight="1" >
 
                     <TextView
-                        android:id="@+id/calories"
+                        android:id="@+id/caloriesC"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"

@@ -262,14 +262,14 @@ int id alertSubject 0x7f050046
 int id alertSubjectNumber 0x7f050047
 int id always 0x7f05000b
 int id beginning 0x7f050011
-int id calories 0x7f05005d
+int id caloriesC 0x7f05005d
 int id checkbox 0x7f05002d
 int id collapseActionView 0x7f05000d
 int id conclusion 0x7f05004b
 int id default_activity_button 0x7f050028
 int id dialog 0x7f05000e
 int id disableHome 0x7f050008
-int id distance 0x7f05005c
+int id distanceC 0x7f05005c
 int id dropdown 0x7f05000f
 int id duration 0x7f05004d
 int id editText1 0x7f050040

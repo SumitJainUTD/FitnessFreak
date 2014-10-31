@@ -1109,14 +1109,14 @@ containing a value of this type.
         public static final int alertSubjectNumber=0x7f050047;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
-        public static final int calories=0x7f05005d;
+        public static final int caloriesC=0x7f05005d;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int conclusion=0x7f05004b;
         public static final int default_activity_button=0x7f050028;
         public static final int dialog=0x7f05000e;
         public static final int disableHome=0x7f050008;
-        public static final int distance=0x7f05005c;
+        public static final int distanceC=0x7f05005c;
         public static final int dropdown=0x7f05000f;
         public static final int duration=0x7f05004d;
         public static final int editText1=0x7f050040;
