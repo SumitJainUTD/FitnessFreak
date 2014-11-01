@@ -32,7 +32,7 @@
                     android:paddingBottom="5sp"
                     android:paddingLeft="3sp"
                     android:text="value"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
             <LinearLayout
@@ -50,7 +50,7 @@
                     android:paddingBottom="5sp"
                     android:paddingLeft="3sp"
                     android:text="value"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -68,7 +68,7 @@
                     android:paddingBottom="5sp"
                     android:paddingLeft="3sp"
                     android:text="value"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -86,7 +86,7 @@
                     android:paddingBottom="5sp"
                     android:paddingLeft="3sp"
                     android:text="value"
-                    android:textSize="18sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
         </LinearLayout>

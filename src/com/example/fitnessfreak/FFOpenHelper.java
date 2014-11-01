@@ -76,7 +76,7 @@ public class FFOpenHelper extends SQLiteOpenHelper {
 				Log.i("Steps", String.valueOf("CCCCCCCCCCCC"));
 				steps = csr.getInt(1)+1;
 				distance = csr.getDouble(2)+0.0008;
-				calories = csr.getDouble(3)+0.00005;
+				calories = csr.getDouble(3)+0.05;
 			}
 			csr.close();
 			cv.put("Steps", steps);

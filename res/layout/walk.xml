@@ -56,7 +56,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:textSize="30dp"
+                        android:textSize="20dp"
                          android:textColor="#31698a"
                         android:text="0 kms" />
                 </LinearLayout>
@@ -71,7 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:textSize="30dp"
+                        android:textSize="20dp"
                          android:textColor="#31698a"
                         android:text="0 kCals" />
                 </LinearLayout>

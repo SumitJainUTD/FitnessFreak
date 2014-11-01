@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.TabHost.TabSpec;
 
 public class RecordsActivity extends Activity {
@@ -33,7 +34,15 @@ public class RecordsActivity extends Activity {
 	}
 
 	public void update() {
-		strQuery = "Select * from (select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, 'Yesterday' as walkDate from walk where walkDate = strftime('%m/%d/%Y',date('now','-1 days')) UNION select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, '7 Days' as walkDate from walk where walkDate between strftime('%m/%d/%Y',date('now','-6 days')) and strftime('%m/%d/%Y',date('now')))UNION select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, '30 Days' as walkDate from walk where walkDate between strftime('%m/%d/%Y',date('now','-30 days')) and strftime('%m/%d/%Y',date('now'))UNION select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, '180 Days' as walkDate from walk where walkDate between strftime('%m/%d/%Y',date('now','-180 days')) and strftime('%m/%d/%Y',date('now')) order by walkDate DESC";
+		
+		long DAY_IN_MS = 1000 * 60 * 60 * 24;
+		Date date7 = new Date(System.currentTimeMillis() - (7 * DAY_IN_MS));
+		Date date1 = new Date(System.currentTimeMillis() - (1 * DAY_IN_MS));
+		Date date30 = new Date(System.currentTimeMillis() - (30 * DAY_IN_MS));
+		Date date180 = new Date(System.currentTimeMillis() - (180 * DAY_IN_MS));
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Date now  = new Date();
+		strQuery = "Select * from (select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, 'Yesterday' as walkDate from walk where walkDate = '" + sdf.format(date1) + "' UNION select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, '7 Days' as walkDate from walk where walkDate between '" + sdf.format(date7) + "' and '" + sdf.format(now) + "')UNION select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, '30 Days' as walkDate from walk where walkDate between '" + sdf.format(date30) + "' and '" + sdf.format(now) + "' UNION select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, '180 Days' as walkDate from walk where walkDate between '" + sdf.format(date180) + "' and '" + sdf.format(now) + "' order by walkDate DESC";
 		Cursor csr = cf.getData(strQuery);
 		Log.i("com.example.FF", "Cursor returned for records"); //
 		rcrdAdapter = new RecordsAdapter(this, csr);
@@ -42,7 +51,7 @@ public class RecordsActivity extends Activity {
 
 	public void Split(View v) {
 		// strQuery = "Select * from Walk";
-		strQuery = "Select * from Walk";
+		strQuery = "Select * from Walk order by walkDate DESC ";
 		Cursor csr = cf.getData(strQuery);
 		Log.i("com.example.FF", "Cursor returned for records"); //
 		rcrdAdapter = new RecordsAdapter(this, csr);
@@ -50,7 +59,14 @@ public class RecordsActivity extends Activity {
 	}
 
 	public void Combine(View v) {
-		strQuery = "Select * from (select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, 'Yesterday' as walkDate from walk where walkDate = strftime('%m/%d/%Y',date('now','-1 days')) UNION select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, '7 Days' as walkDate from walk where walkDate between strftime('%m/%d/%Y',date('now','-6 days')) and strftime('%m/%d/%Y',date('now')))UNION select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, '30 Days' as walkDate from walk where walkDate between strftime('%m/%d/%Y',date('now','-30 days')) and strftime('%m/%d/%Y',date('now'))UNION select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, '180 Days' as walkDate from walk where walkDate between strftime('%m/%d/%Y',date('now','-180 days')) and strftime('%m/%d/%Y',date('now')) order by walkDate DESC";
+		long DAY_IN_MS = 1000 * 60 * 60 * 24;
+		Date date7 = new Date(System.currentTimeMillis() - (7 * DAY_IN_MS));
+		Date date1 = new Date(System.currentTimeMillis() - (1 * DAY_IN_MS));
+		Date date30 = new Date(System.currentTimeMillis() - (30 * DAY_IN_MS));
+		Date date180 = new Date(System.currentTimeMillis() - (180 * DAY_IN_MS));
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Date now  = new Date();
+		strQuery = "Select * from (select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, 'Yesterday' as walkDate from walk where walkDate = '" + sdf.format(date1) + "' UNION select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, '7 Days' as walkDate from walk where walkDate between '" + sdf.format(date7) + "' and '" + sdf.format(now) + "')UNION select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, '30 Days' as walkDate from walk where walkDate between '" + sdf.format(date30) + "' and '" + sdf.format(now) + "' UNION select _id, Sum(Steps) as Steps, Sum(distance) as distance, Sum(calories) as calories, '180 Days' as walkDate from walk where walkDate between '" + sdf.format(date180) + "' and '" + sdf.format(now) + "' order by walkDate DESC";
 		Cursor csr = cf.getData(strQuery);
 		Log.i("com.example.FF", "Cursor returned for records"); //
 		rcrdAdapter = new RecordsAdapter(this, csr);
