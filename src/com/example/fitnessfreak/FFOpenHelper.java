@@ -91,8 +91,8 @@ public class FFOpenHelper extends SQLiteOpenHelper {
 		} else {
 			ContentValues cv = new ContentValues();
 			cv.put("Steps", 1);
-			cv.put("distance", 1);
-			cv.put("calories", 1);
+			cv.put("distance", 0.008);
+			cv.put("calories", 0.05);
 			cv.put("walkDate", date);
 			
 			db.insert("Walk", null, cv);

@@ -51,7 +51,7 @@ public class Main extends TabActivity {
         tab3.setContent(new Intent(this,RecordsActivity.class));
 //        tab3.setContent(tabHost.newTabSpec("parent2").setIndicator("Parent2"),YesterdayRecords.class, null);
         
-        tab4.setIndicator("Settings");
+        tab4.setIndicator("User");
         tab4.setContent(new Intent(this,Settings.class));
                 /** Add the tabs  to the TabHost to display. */
         tabHost.addTab(tab1);
