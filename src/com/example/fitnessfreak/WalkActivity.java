@@ -75,7 +75,8 @@ public class WalkActivity extends Activity implements SensorEventListener {
 		}
 
 		start = (Button) findViewById(R.id.start);
-		start.setText("Start");
+		start.setText("Stop");
+		 updateWalkData(); 
 	}
 
 	public void startSensor() {
@@ -184,7 +185,7 @@ public class WalkActivity extends Activity implements SensorEventListener {
 			EMAvector = vctr * k + (1 - k) * EMAvector;
 		}
 	}
-
+	@Override
 	protected void onResume() {
 		super.onResume();
 //		steps = (TextView) findViewById(R.id.steps);
@@ -199,7 +200,22 @@ public class WalkActivity extends Activity implements SensorEventListener {
 //			distance.setText("0 km");
 //			steps.setText("0 kCals");
 //		}
+//		if (start.getText().equals("Stop")) {
+//			startSensor();
+//		} else if (start.getText().equals("Start")) {
+//			stopSensor();
+//		}
+		updateWalkData(); 
+		startSensor();
+		//Toast.makeText(this, "resumed!",Toast.LENGTH_LONG).show();
 
+	}
+	@Override
+	public void onBackPressed()
+	{
+	     // code here to show dialog
+	     super.onBackPressed();  // optional depending on your needs
+	     
 	}
 
 	public void updateWalkData() {
